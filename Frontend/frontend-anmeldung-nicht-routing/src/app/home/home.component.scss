@@ -1,0 +1,57 @@
+.multiple-box-container mat-form-field + mat-form-field {
+    margin-left: 8px;
+}
+
+.multiple-box-container mat-form-field {
+    width: 320px;
+}
+
+.multiple-box-container form {
+    margin-bottom: 20px;
+}
+
+.multiple-box-container form > * {
+    margin: 12px 0;
+}
+
+.multiple-box-container .mat-radio-button {
+    margin: 0 12px;
+}
+
+.form-field-row {
+    flex-direction: row;
+    flex-flow: nowrap;
+    text-align: left;
+
+}
+
+.form-field-row form > * {
+    margin-left: 8px 0;
+}
+
+.form-field-in-row {
+    width: 25%;
+    float: left;
+    margin: 12pt;
+
+}
+
+.form-field-single-box {
+    display: flex;
+    align-items: flex-start;
+    width: 50%;
+    margin: 12pt;
+}
+
+
+.everything-container {
+    margin: 12pt;
+}
+
+.form-field-in-row mat-form-field + mat-form-field {
+    margin-left: 8px;
+}
+
+.form-field-in-row mat-form-field {
+    flex-basis: 50%;
+}
