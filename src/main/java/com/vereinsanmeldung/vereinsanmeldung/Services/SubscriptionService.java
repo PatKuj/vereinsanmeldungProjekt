@@ -17,28 +17,28 @@ public class SubscriptionService {
 
     public List<SubscriptionDto> getAllSubscriptions() {
         return subscriptionMapper.findAll().stream()
-                .map(SubscriptionMapper.INSTANCE::subscriptionEntityToDto)
+                .map(subscriptionMapper::subscriptionEntityToDto)
                 .collect(Collectors.toList());
     }
 
     public SubscriptionDto getSubscriptionById(int subscriptionId) {
         SubscriptionEntity subscriptionEntity = subscriptionMapper.readSubscriptionById(subscriptionId);
-        return subscriptionEntity != null ? SubscriptionMapper.INSTANCE.subscriptionEntityToDto(subscriptionEntity) : null;
+        return subscriptionEntity != null ? subscriptionMapper.subscriptionEntityToDto(subscriptionEntity) : null;
     }
 
     // Insert (Create) operation
     public SubscriptionDto createSubscription(SubscriptionDto subscriptionDto) {
-        SubscriptionEntity subscriptionEntity = SubscriptionMapper.INSTANCE.subscriptionDtoToEntity(subscriptionDto);
+        SubscriptionEntity subscriptionEntity = subscriptionMapper.subscriptionDtoToEntity(subscriptionDto);
         subscriptionMapper.insertSubscription(subscriptionEntity);
-        return SubscriptionMapper.INSTANCE.subscriptionEntityToDto(subscriptionEntity);
+        return subscriptionMapper.subscriptionEntityToDto(subscriptionEntity);
     }
 
     // Update operation (all data except ID)
     public SubscriptionDto updateSubscription(int subscriptionId, SubscriptionDto subscriptionDto) {
-        SubscriptionEntity subscriptionEntity = SubscriptionMapper.INSTANCE.subscriptionDtoToEntity(subscriptionDto);
+        SubscriptionEntity subscriptionEntity = subscriptionMapper.subscriptionDtoToEntity(subscriptionDto);
         subscriptionEntity.setSubscriptionId(subscriptionId); // Make sure the ID remains the same
         subscriptionMapper.updateSubscription(subscriptionEntity);
-        return SubscriptionMapper.INSTANCE.subscriptionEntityToDto(subscriptionEntity);
+        return subscriptionMapper.subscriptionEntityToDto(subscriptionEntity);
     }
 
     public void deleteSubscription(int subscriptionId) {

@@ -10,37 +10,54 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 @Service
 public class AdditionalUserService {
+
     @Autowired
     private AdditionalUserMapper additionalUserMapper;
 
+    // Get all additional users
     public List<AdditionalUserDto> getAllAdditionalUsers() {
-        return additionalUserMapper.findAll().stream()
-                .map(AdditionalUserMapper.INSTANCE::additionalUserEntityToDto)
+        List<AdditionalUserEntity> entities = additionalUserMapper.findAll();
+        return entities.stream()
+                .map(additionalUserMapper::additionalUserEntityToDto)
                 .collect(Collectors.toList());
     }
 
+    // Get additional users by user ID
+    public List<AdditionalUserDto> getAdditionalUsersByUserId(int userId) {
+        List<AdditionalUserEntity> entities = additionalUserMapper.findAll()  // You may need a dedicated query for finding by userId
+                .stream()
+                .filter(entity -> entity.getUserId() == userId)
+                .collect(Collectors.toList());
+        return entities.stream()
+                .map(additionalUserMapper::additionalUserEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    // Get additional user by ID
     public AdditionalUserDto getAdditionalUserById(int additionalUserId) {
-        AdditionalUserEntity additionalUserEntity = additionalUserMapper.readAdditionalUserById(additionalUserId);
-        return additionalUserEntity != null ? AdditionalUserMapper.INSTANCE.additionalUserEntityToDto(additionalUserEntity) : null;
+        AdditionalUserEntity entity = additionalUserMapper.readAdditionalUserById(additionalUserId);
+        return additionalUserMapper.additionalUserEntityToDto(entity);
     }
 
-    // Insert (Create) operation
+    // Create a new additional user
     public AdditionalUserDto createAdditionalUser(AdditionalUserDto additionalUserDto) {
-        AdditionalUserEntity additionalUserEntity = AdditionalUserMapper.INSTANCE.additionalUserDtoToEntity(additionalUserDto);
-        additionalUserMapper.insertAdditionalUser(additionalUserEntity);
-        return AdditionalUserMapper.INSTANCE.additionalUserEntityToDto(additionalUserEntity);
+        AdditionalUserEntity entity = additionalUserMapper.additionalUserDtoToEntity(additionalUserDto);
+        additionalUserMapper.insertAdditionalUser(entity);
+        return additionalUserMapper.additionalUserEntityToDto(entity);
     }
 
-    // Update operation (all data except ID)
+    // Update additional user
     public AdditionalUserDto updateAdditionalUser(int additionalUserId, AdditionalUserDto additionalUserDto) {
-        AdditionalUserEntity additionalUserEntity = AdditionalUserMapper.INSTANCE.additionalUserDtoToEntity(additionalUserDto);
-        additionalUserEntity.setAdditionalUserId(additionalUserId); // Make sure the ID remains the same
-        additionalUserMapper.updateAdditionalUser(additionalUserEntity);
-        return AdditionalUserMapper.INSTANCE.additionalUserEntityToDto(additionalUserEntity);
+        AdditionalUserEntity entity = additionalUserMapper.additionalUserDtoToEntity(additionalUserDto);
+        entity.setAdditionalUserId(additionalUserId);
+        additionalUserMapper.updateAdditionalUser(entity);
+        return additionalUserMapper.additionalUserEntityToDto(entity);
     }
 
+    // Delete additional user
     public void deleteAdditionalUser(int additionalUserId) {
         additionalUserMapper.deleteAdditionalUser(additionalUserId);
     }

@@ -1,10 +1,15 @@
 services:
-  app:
+  postgres:
+    image: postgres:13
+    container_name: postgres_container
     ports:
-      - 5432:5432
-    image: postgres:16.1
-    restart: always
+      - "5433:5432" # Ändere den Host-Port auf 5433, um Konflikte zu vermeiden
     environment:
-      POSTGRES_DB: mitglied-app
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: mitglied
-      POSTGRES_USER: mitglied
+      POSTGRES_DB: MitgliederDB
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

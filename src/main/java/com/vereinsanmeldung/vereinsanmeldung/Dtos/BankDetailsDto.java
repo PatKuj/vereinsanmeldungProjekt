@@ -9,4 +9,9 @@ public record BankDetailsDto(
         String bankName,
         String iban,
         int userId
-) {}
+) {
+    // Setter für userId
+    public BankDetailsDto withUserId(int userId) {
+        return new BankDetailsDto(bankId, firstName, lastName, bic, bankName, iban, userId);
+    }
+}

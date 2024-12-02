@@ -42,14 +42,4 @@ public class AdditionalUserEntity {
         this.userId = userId;
     }
 
-    @Override
-    public String toString() {
-        return "AdditionalUserEntity{" +
-                "additionalUserId=" + additionalUserId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", birthDate=" + birthDate +
-                ", userId=" + userId +
-                '}';
-    }
 }

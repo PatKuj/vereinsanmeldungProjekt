@@ -1,6 +1,7 @@
 // AdditionalUser Mapper
 package com.vereinsanmeldung.vereinsanmeldung.Mapper;
 
+import com.vereinsanmeldung.vereinsanmeldung.Dtos.AdditionalUserDto;
 import com.vereinsanmeldung.vereinsanmeldung.Entities.AdditionalUserEntity;
 import org.apache.ibatis.annotations.*;
 
@@ -32,4 +33,12 @@ public interface AdditionalUserMapper {
     // Update operation (all data except ID)
     @Update("UPDATE additional_user SET first_name=#{firstName}, last_name=#{lastName}, birth_date=#{birthDate}, user_id=#{userId} WHERE additional_user_id=#{additionalUserId}")
     void updateAdditionalUser(AdditionalUserEntity additionalUser);
+
+    // Delete operation
+    @Delete("DELETE FROM additional_user WHERE additional_user_id=#{additionalUserId}")
+    void deleteAdditionalUser(@Param("additionalUserId") int additionalUserId);
+
+    // Mapping methods
+    AdditionalUserDto additionalUserEntityToDto(AdditionalUserEntity entity);
+    AdditionalUserEntity additionalUserDtoToEntity(AdditionalUserDto dto);
 }

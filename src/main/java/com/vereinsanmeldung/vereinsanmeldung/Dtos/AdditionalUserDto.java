@@ -10,4 +10,9 @@ public record AdditionalUserDto(
         String lastName,
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy") Date birthDate,
         int userId
-) {}
+) {
+    // Setter für userId
+    public AdditionalUserDto withUserId(int userId) {
+        return new AdditionalUserDto(additionalUserId, firstName, lastName, birthDate, userId);
+    }
+}

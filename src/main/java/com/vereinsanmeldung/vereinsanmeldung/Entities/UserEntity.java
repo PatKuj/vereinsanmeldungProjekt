@@ -2,6 +2,7 @@
 package com.vereinsanmeldung.vereinsanmeldung.Entities;
 
 import java.util.Date;
+import java.util.List;
 
 public class UserEntity {
     private int userId;
@@ -14,6 +15,10 @@ public class UserEntity {
     private String postalCode;
     private Boolean confirmation;
     private int subscriptionId;
+
+    // Neue Felder für zusätzliche Benutzer und BankDetails
+    private List<AdditionalUserEntity> additionalUsers;
+    private BankDetailsEntity bankDetails;
 
     // Getter and Setter methods
     public int getUserId() {
@@ -77,6 +82,22 @@ public class UserEntity {
         this.subscriptionId = subscriptionId;
     }
 
+    // Getter and Setter for AdditionalUsers
+    public List<AdditionalUserEntity> getAdditionalUsers() {
+        return additionalUsers;
+    }
+    public void setAdditionalUsers(List<AdditionalUserEntity> additionalUsers) {
+        this.additionalUsers = additionalUsers;
+    }
+
+    // Getter and Setter for BankDetails
+    public BankDetailsEntity getBankDetails() {
+        return bankDetails;
+    }
+    public void setBankDetails(BankDetailsEntity bankDetails) {
+        this.bankDetails = bankDetails;
+    }
+
     @Override
     public String toString() {
         return "UserEntity{" +
@@ -90,7 +111,8 @@ public class UserEntity {
                 ", postalCode='" + postalCode + '\'' +
                 ", confirmation=" + confirmation +
                 ", subscriptionId=" + subscriptionId +
+                ", additionalUsers=" + additionalUsers +
+                ", bankDetails=" + bankDetails +
                 '}';
     }
 }
-
